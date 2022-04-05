@@ -1,0 +1,50 @@
+.newchat {
+    display: flex;
+    flex-direction: column;
+    max-width: 415px;
+    width: 35%;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    transition: all ease .5s;
+
+    &.is-show { left: 0; }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: 60px 15px 15px;
+        background-color: #00bfa5;
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &__title {
+        flex: 1;
+        height: 40px;
+        line-height: 40px;
+        font-weight: 700;
+        color: #fff;
+        margin-left: 20px;
+    }
+
+    &__list {
+        flex: 1;
+        padding-right: 5px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar { width: 6px; height: 6px; }
+        &::-webkit-scrollbar-thumb { background-color: rgba($color: #000000, $alpha: .2); }
+    }
+}

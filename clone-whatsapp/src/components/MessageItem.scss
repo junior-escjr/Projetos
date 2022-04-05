@@ -1,0 +1,44 @@
+.messageitem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    padding-right: 9%;
+    padding-left: 9%;
+
+    &.is_message-out {
+        align-items: flex-end;
+
+        .messageitem__inner {
+            background-color: #dcf8c6;
+        }
+    }
+    &.is_message-in {
+        align-items: flex-start;
+
+        .messageitem__inner {
+            background-color: #fff;
+        }
+    }
+
+    &__inner {
+        max-width: 65%;
+        padding: 6px 7px 8px 9px;
+        border-radius: 7.5px;
+        box-shadow: 0 1px 0.5px rgba(#000, .13);
+    }
+
+    &__text {
+        min-width: 104px;
+        font-size: 14px;
+        color: #303030;
+        padding-right: 30px;
+    }
+
+    &__hour {
+        height: 15px;
+        font-size: 11px;
+        color: rgba(#000, .45);
+        float: right;
+        margin-top: -10px;
+    }
+}

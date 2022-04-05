@@ -1,0 +1,93 @@
+.chatwindow {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        color: #51585c;
+        padding: 8px;
+        cursor: pointer;
+        transition: all ease .3s;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba($color: #000000, $alpha: .08);
+        background-color: #ededed;
+
+        &__info {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        &__avatar {
+            flex-grow: 0;
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+
+            img { border-radius: 50%; }
+        }
+
+        &__name {
+            flex-grow: 1;
+            font-size: 16px;
+            line-height: 21px;
+            color: #000;
+        }
+
+        &__buttons { display: flex; }
+    }
+
+    &__main {
+        flex-grow: 1;
+        padding: 20px 0;
+        overflow-y: auto;
+        background: url('../../public/images/bg-chat-tile-light_04fcacde539c58cca6745483d4858c52.png') center center #e5ddd5;
+
+        &::-webkit-scrollbar { width: 6px; height: 6px; }
+        &::-webkit-scrollbar-thumb { background-color: rgba($color: #000000, $alpha: .2); }
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        min-height: 62px;
+        background-color: #f0f0f0;
+
+        &__initial, &__end { display: flex; align-items: center; }
+
+        &__middle { flex-grow: 1; padding: 0 10px; }
+
+        &__input {
+            display: block;
+            width: 100%;
+            min-height: 20px;
+            font-size: 15px;
+            color: #4a4a4a;
+            padding: 9px 12px 11px;
+            background-color: #fff !important;
+            border-radius: 21px;
+        }
+    }
+
+    &__emojiarea {
+        height: 200px;
+        overflow-y: hidden;
+        transition: all ease .3s;
+    }
+}
+
+aside.emoji-picker-react {
+    width: auto;
+    background: none;
+
+    .emoji-group:before { background: none; }
+}

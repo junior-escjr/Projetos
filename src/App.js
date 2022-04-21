@@ -28,6 +28,14 @@ export default () => {
         }
     }
 
+    useEffect(() => {
+        if( user !== null) {
+           let unsub =  Api.onChatList( user.id, setChatList );
+           return unsub;
+        }
+
+    }, [user]);
+
     const handleLoginData = async ( u ) => {
         let newUser = {
             id: u.uid,

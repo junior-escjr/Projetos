@@ -92,7 +92,9 @@ export default () => {
             </aside>
             <div className="content">
                 {activeChat.chatId !== undefined &&
-                    <ChatWindow user={user} />
+                    <ChatWindow
+                    user={user}
+                    data={activeChat} />
                 }
 
                 {activeChat.chatId === undefined &&

@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './ChatListItem.scss';
 
 export default ({ onClick, active, data }) => {
-    const [time, settime] = useState('');
+    const [time, setTime] = useState('');
 
     useEffect(() => {
-        if( data ) {
+        if( data && data.lastMessageDate ) {
             let d = new Date(data.lastMessageDate.seconds * 1000);
             let hours = d.getHours();
             let min = d.getMinutes();
             hours = hours < 10 ? '0' + hours : hours;
             min = min < 10 ? '0' + min : min;
-            settime(`${hours}:${min}`);
+            setTime(`${hours}:${min}`);
         }
     }, [data]);
 

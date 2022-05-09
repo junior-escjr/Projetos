@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import EmojiPicker from "emoji-picker-react";
 import MessageItem from "./MessageItem";
+import Api from "../Api";
 import './ChatWindow.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import MicIcon from '@mui/icons-material/Mic';
 
-export default ({user}) => {
+export default ({user, data}) => {
     const mainchat = useRef();
 
     let recognition = null;
@@ -23,29 +24,21 @@ export default ({user}) => {
     const [emojiOpen, setEmojiOpen] = useState( false );
     const [text, setText] = useState('');
     const [listening, setListening] = useState( false );
-    const [listMessage, setListMessage] = useState([
-        {author: 27, message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-        {author: 27, message: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."},
-        {author: 1, message: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."},
-        {author: 27, message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-        {author: 27, message: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."},
-        {author: 1, message: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."},
-        {author: 27, message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-        {author: 27, message: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."},
-        {author: 1, message: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."},
-        {author: 27, message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-        {author: 27, message: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."},
-        {author: 1, message: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."},
-        {author: 27, message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-        {author: 27, message: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."},
-        {author: 1, message: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."},
-    ]);
+    const [listMessage, setListMessage] = useState([]);
+    const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        if( mainchat.current.scrollHeight > mainchat.current.offsetHeight ) {
-            mainchat.current.scrollTop = mainchat.current.scrollHeight - mainchat.current.offsetHeight;
-        }
-    }, [listMessage])
+    useEffect( () => {
+        setListMessage([]);
+        let unsub = Api.onChatMessage( data.chatId, setListMessage, setUsers );
+
+        return unsub;
+    }, [data.chatId]);
+
+    // useEffect(() => {
+    //     if( mainchat.current.scrollHeight > mainchat.current.offsetHeight ) {
+    //         mainchat.current.scrollTop = mainchat.current.scrollHeight - mainchat.current.offsetHeight;
+    //     }
+    // }, [listMessage])
 
     const handleEmojiClick = ( e, emojiObject ) => {
         setText( text + emojiObject.emoji );
@@ -69,17 +62,29 @@ export default ({user}) => {
         }
     }
 
+    const handleInputKeyUp = ( e ) => {
+        if( e.keyCode == 13 ) {
+            handleSendClick();
+        }
+    }
+
+    const handleSendClick = () => {
+        if( text !== '') {
+            Api.sendMessage( data, user.id, 'text', text, users);
+            setText('');
+            setEmojiOpen( false );
+        }
+    }
+
     return(
         <div className="chatwindow">
             <div className="chatwindow__header">
                 <div className="chatwindow__header__info">
                     <figure className="chatwindow__header__avatar">
-                        <img src="https://www.w3schools.com/howto/img_avatar2.png" />
+                        <img src={data.image} />
                     </figure>
 
-                    <div className="chatwindow__header__name">
-                        Junior
-                    </div>
+                    <div className="chatwindow__header__name">{data.title}</div>
                 </div>
 
                 <div className="chatwindow__header__buttons">
@@ -131,7 +136,8 @@ export default ({user}) => {
                 <div className="chatwindow__footer__middle">
                     <input type="text" className="chatwindow__footer__input" placeholder="Mensagem"
                     value={ text }
-                    onChange={ e => setText( e.target.value ) } />
+                    onChange={ e => setText( e.target.value ) }
+                    onKeyUp={handleInputKeyUp} />
                 </div>
                 
                 <div className="chatwindow__footer__end">
@@ -143,7 +149,7 @@ export default ({user}) => {
                     }
 
                     {text !== '' &&
-                        <div className="chatwindow__btn">
+                        <div className="chatwindow__btn" onClick={handleSendClick}>
                             <SendIcon />
                         </div>
                     }

@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    transition: all ease .5s;
+
+    &__logo {
+        height: 25px;
+
+        img { height: 100%; }
+    }
+
+    &__avatar {
+        height: 35px;
+
+        img { height: 100%; border-radius: 3px; }
+    }
+
+    &.has-bg { background-color: #141414; }
+}

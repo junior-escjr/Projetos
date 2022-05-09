@@ -1,0 +1,55 @@
+.lists { margin-top: -150px; position: relative; }
+
+.movierow {
+    margin-bottom: 30px;
+    position: relative;
+
+    &:hover {
+        .movierow__left, .movierow__right { opacity: 1; }
+    }
+
+    &__title { margin-left: 30px; }
+
+    &__row {
+        padding-left: 30px;
+        overflow-x: hidden;
+
+        &__holder {
+            display: flex;
+            transition: all ease .5s;
+        }
+    }
+
+    &__item {
+        width: 150px;
+        cursor: pointer;
+        
+        &__poster {
+            transform: scale(.9);
+            transition: all ease-in-out .3s;
+
+            &:hover { transform: scale(1); }
+        }
+    }
+
+    &__left, &__right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 225px;
+        position: absolute;
+        bottom: 0;
+        background-color: rgba($color: #000000, $alpha: .6);
+        z-index: 99;
+        cursor: pointer;
+        overflow: hidden;
+        opacity: 0;
+        transition: all ease .5s;
+
+        @media ( max-width: 760px ) { opacity: 1; }
+    }
+
+    &__left { left: 0; }
+    &__right { right: 0; }
+}

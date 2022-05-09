@@ -86,7 +86,7 @@
 }
 
 aside.emoji-picker-react {
-    width: auto;
+    width: auto !important;
     background: none;
 
     .emoji-group:before { background: none; }

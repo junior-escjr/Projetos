@@ -1,7 +1,5 @@
-# Projetos
-Projeto com fins educacionais
+# App de tradução
 
-- [Clone Netflix](https://clonenetfix.vercel.app/)
-- [Clone WhatsApp](https://clonewhatsappweb.vercel.app/)
+[Link do projeto](https://github.com/facebook/create-react-app).
 
 Este projeto foi feito simplesmente com o intuito de gerar portfólio e como estudo com o uso do framework React.

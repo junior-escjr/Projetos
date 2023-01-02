@@ -1,15 +1,15 @@
 import React from 'react';
-import './Field.scss';
 
-const Field = () => {
+const Field = ({ value, onChange }) => {
     return(
-        <div>
+        <div className="field">
             <h1>Translate App</h1>
-
-            <label htmlFor="">
-                Enter English <br />
-                <input type="text" />
-            </label>
+            <label>Enter English</label>
+            <input
+                className="input"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+            />
         </div>
     );
 }

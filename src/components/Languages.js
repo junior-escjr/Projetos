@@ -1,20 +1,36 @@
 import React from "react";
-import './Languages.scss';
 
-const Languages = () => {
+const LANGUAGES = [
+    { label: "Afrikaans", value: "af" },
+    { label: "Arabic", value: "ar" },
+    { label: "French", value: "fr" },
+    { label: "Hindi", value: "hi" },
+    { label: "Japanese", value: "ja" },
+    { label: "Portuguese", value: "pt" },
+    { label: "Russian", value: "ru" },
+    { label: "Simplified Chinese", value: "zh-CN" },
+    { label: "Spanish", value: "es" },
+    { label: "Swahili", value: "sw" },
+    { label: "Thai", value: "th" }
+  ];
+
+const Languages = ({ language, onLanguageChange }) => {
     return(
         <div>
-            <button>Afrikaans</button>
-            <button>Arabic</button>
-            <button>French</button>
-            <button>Hindi</button>
-            <button>Japanese</button>
-            <button>Portuguese</button>
-            <button>Russian</button>
-            <button>Simplified Chinese</button>
-            <button>Spanish</button>
-            <button>Swahili</button>
-            <button>Thai</button>
+            <label className="label">Select Language</label>
+            <div className="opts">
+                {LANGUAGES.map(({ label, value }) => {
+                return (
+                    <div
+                    key={label}
+                    className={`opt ${language === value ? "selected" : ""}`}
+                    onClick={() => onLanguageChange(value)}
+                    >
+                    {label}
+                    </div>
+                );
+                })}
+            </div>
         </div>
     );
 }

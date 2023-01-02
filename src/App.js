@@ -10,10 +10,10 @@ function App() {
 
   return (
     <div className="App">
-      <Field />
-      <Languages />
+      <Field onChange={setText} />
+      <Languages language={language} onLanguageChange={setLanguage} />
       <hr />
-      <Translate />
+      <Translate text={text} language={language} />
     </div>
   );
 }
